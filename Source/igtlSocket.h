@@ -66,8 +66,8 @@ class IGTLCommon_EXPORT Socket : public Object
   typedef SmartPointer<Self>        Pointer;
   typedef SmartPointer<const Self>  ConstPointer;
 
-  igtlTypeMacro(igtl::Socket, igtl::Object)
-  igtlNewMacro(igtl::Socket);
+  igtlTypeMacro(Socket, Object);
+  igtlNewMacro(Socket);
 
 public:
 

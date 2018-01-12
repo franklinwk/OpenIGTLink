@@ -46,13 +46,13 @@ public:
   typedef SmartPointer<Self>        Pointer;
   typedef SmartPointer<const Self>  ConstPointer;
 
-  igtlTypeMacro(igtl::ClientSocket, igtl::Socket)
-  igtlNewMacro(igtl::ClientSocket);
+  igtlTypeMacro(ClientSocket, Socket);
+  igtlNewMacro(ClientSocket);
 
   /// Connects to host. Returns 0 on success, -1 on error.
   int ConnectToServer(const char* hostname, int port, bool logErrorIfServerConnectionFailed = true); 
   
-protected:
+public:
   ClientSocket();
   ~ClientSocket();
 

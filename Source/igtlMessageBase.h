@@ -88,7 +88,7 @@ namespace igtl
     typedef std::map<std::string, std::pair<IANA_ENCODING_TYPE, std::string> > MetaDataMap;
 #endif
 
-    igtlTypeMacro(igtl::MessageBase, igtl::Object)
+	igtlTypeMacro(igtl::MessageBase, igtl::Object);
     igtlNewMacro(igtl::MessageBase);
 
     /// Unpack status. They are returned by the Unpack() function.
@@ -211,19 +211,19 @@ namespace igtl
 
     /// Gets a pointer to the raw byte array for the serialized data including the header and the body.
     void* GetBufferPointer();
-    void* GetPackPointer() { return GetBufferPointer(); }
+	void* GetPackPointer() { return GetBufferPointer(); };
 
     /// Gets a pointer to the raw byte array for the serialized body data.
     void* GetBufferBodyPointer();
-    void* GetPackBodyPointer() { return GetBufferBodyPointer(); }
+	void* GetPackBodyPointer() { return GetBufferBodyPointer(); };
 
     /// Gets the size of the serialized message data.
     int GetBufferSize();
-    int GetPackSize() { return GetBufferSize(); }
+	int GetPackSize() { return GetBufferSize(); };
 
     /// Gets the size of the serialized body data.
     int GetBufferBodySize();
-    int GetPackBodySize() { return GetBufferBodySize(); }
+	int GetPackBodySize() { return GetBufferBodySize(); };
 
     /// Calculate the size of the received content data
     /// Returns -1 if the extended header has not been properly initialized (meta data size, meta data header size, etc...)
@@ -239,14 +239,14 @@ namespace igtl
     /// AllocatePack() allocates memory for underlying buffer
     /// If m_BodySizeToRead > 0, we are allocating for receiving a message
     void AllocateBuffer();
-    void AllocatePack() { AllocateBuffer(); }
+	void AllocatePack() { AllocateBuffer(); };
 
     /// Call InitPack() before receive header.
     /// This function simply resets the Unpacked flag for both
     /// the header and body pack
     /// Only allocate the original 58 byte header
     void InitBuffer();
-    void InitPack() { InitBuffer(); }
+	void InitPack() { InitBuffer(); };
 
     /// Copy() copies contents from the specified Massage class.
     /// If the type of the specified class is the same as this class,
@@ -254,7 +254,7 @@ namespace igtl
     int Copy(const MessageBase* mb);
 
     /// Sets the message header.
-    virtual int SetMessageHeader(const MessageHeader* mb);
+    virtual int SetMessageHeader(const igtl::MessageHeader* mb);
 
     /// GetBodySizeToRead() returns the size of the body to be read. This function must be called
     /// after the message header is set.
@@ -264,9 +264,11 @@ namespace igtl
     MessageBase();
     ~MessageBase();
 
-  protected:
+  public:
     /// Gets the size of the serialized content.
     virtual int CalculateContentBufferSize();
+
+	virtual int Test();
 
     /// Packs (serialize) the content. Must be implemented in all child classes.
     virtual int PackContent();

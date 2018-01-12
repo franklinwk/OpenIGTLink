@@ -114,7 +114,7 @@ void PointElement::GetRGBA(igtlUint8& r, igtlUint8& g, igtlUint8& b, igtlUint8& 
   a = this->m_RGBA[3];
 }
 
-void PointElement::SetPosition(igtlFloat32 position[3])
+void PointElement::SetPosition(float position[3])
 {
   this->m_Position[0] = position[0];
   this->m_Position[1] = position[1];
@@ -122,7 +122,7 @@ void PointElement::SetPosition(igtlFloat32 position[3])
 }
 
 
-void PointElement::SetPosition(igtlFloat32 x, igtlFloat32 y, igtlFloat32 z)
+void PointElement::SetPosition(float x, float y, float z)
 {
   this->m_Position[0] = x;
   this->m_Position[1] = y;

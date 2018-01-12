@@ -203,14 +203,14 @@ IF(${OpenIGTLink_PROTOCOL_VERSION} GREATER "2")
 ENDIF()
 
 IF (NOT (${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION} LESS 3.04))
-	IF(OpenIGTLink_ENABLE_VIDEOSTREAMING)
+	IF(USE_H264 OR USE_VP9 OR USE_X265 OR USE_OpenHEVC)
 		INCLUDE(${CMAKE_CURRENT_SOURCE_DIR}/VideoStreaming/VideoStreaming.cmake)
 	ENDIF()
 
 	#-----------------------------------------------------------------------------
 	# Configure WebSocket
 	# Create the link to the WebSocket libraries
-	IF(OpenIGTLink_USE_WEBSOCKET)
+	IF(USE_WEBSOCKET)
 		FIND_PACKAGE(WebSocket REQUIRED)
 		LIST(APPEND LINK_LIBS WebSocket)
 
@@ -245,19 +245,19 @@ target_include_directories(OpenIGTLink PUBLIC $<INSTALL_INTERFACE:${OpenIGTLink_
 
 LIST(APPEND OpenIGTLink_DEPENDENCIES igtlutil)
 IF (NOT (${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION} LESS 3.04))
-  IF(OpenIGTLink_USE_H264 AND (NOT OpenH264_FOUND))
+  IF(USE_H264 AND (NOT OpenH264_FOUND))
     add_dependencies(OpenIGTLink OpenH264)
   ENDIF()
-  IF(OpenIGTLink_USE_VP9 AND (NOT VP9_FOUND))
+  IF(USE_VP9 AND (NOT VP9_FOUND))
     add_dependencies(OpenIGTLink VP9)
   ENDIF()
-  IF(OpenIGTLink_USE_X265 AND (NOT X265_FOUND))
+  IF(USE_X265 AND (NOT X265_FOUND))
     add_dependencies(OpenIGTLink X265)
   ENDIF()
-  IF(OpenIGTLink_USE_OpenHEVC AND (NOT OpenHEVC_FOUND))
+  IF(USE_OpenHEVC AND (NOT OpenHEVC_FOUND))
     add_dependencies(OpenIGTLink OpenHEVC)
   ENDIF()
-	IF(OpenIGTLink_USE_WEBSOCKET)
+	IF(USE_WEBSOCKET)
 		add_dependencies(OpenIGTLink WebSocket)
 	ENDIF()
 ELSE()
@@ -266,7 +266,7 @@ ENDIF()
 
 TARGET_LINK_LIBRARIES(OpenIGTLink PUBLIC ${LINK_LIBS})
 
-IF(MSVC)
+IF(MSVC) 
   target_compile_options(OpenIGTLink PRIVATE /MP)
 ENDIF()
 
@@ -284,3 +284,93 @@ INSTALL(TARGETS OpenIGTLink EXPORT OpenIGTLink
   LIBRARY DESTINATION ${OpenIGTLink_INSTALL_LIB_DIR} COMPONENT RuntimeLibraries
   ARCHIVE DESTINATION ${OpenIGTLink_INSTALL_LIB_DIR} COMPONENT Development)
   
+#-----------------------------------------------------------------------------
+# SWIG for Python
+# MAYBE TRY igtlutil/sfijds.c, but problem is cxx files not finding util, perhaps use a define or otherwise to use a different #include instead
+# JUST USE $OpenIGTLink_sources instead
+IF(USE_SWIG_PYTHON)
+  SET(OpenIGTLink_SWIGSOURCES
+    igtlBindMessage.cxx
+    igtlCapabilityMessage.cxx
+    igtlClientSocket.cxx
+    igtlColorTableMessage.cxx
+    igtlCommandMessage.cxx
+    igtlConditionVariable.cxx
+    igtlFastMutexLock.cxx
+    igtlGeneralSocket.cxx
+    igtlImageMessage.cxx
+    igtlImageMessage2.cxx
+    igtlImageMetaMessage.cxx
+    igtlLabelMetaMessage.cxx
+    igtlLightObject.cxx
+    igtlMath.cxx
+    igtlMessageBase.cxx
+    igtlMessageFactory.cxx
+    igtlMessageRTPWrapper.cxx
+    igtlMultiThreader.cxx
+    igtlMutexLock.cxx
+    igtlNDArrayMessage.cxx
+    igtlObject.cxx
+    igtlObjectFactoryBase.cxx
+    igtlOSUtil.cxx
+    igtlPointMessage.cxx
+    igtlPolyDataMessage.cxx
+    igtlPositionMessage.cxx
+    igtlQuaternionTrackingDataMessage.cxx
+    igtlQueryMessage.cxx
+    igtlSensorMessage.cxx
+    igtlServerSocket.cxx
+    igtlSessionManager.cxx
+    igtlSimpleFastMutexLock.cxx
+    igtlSocket.cxx
+    igtlStatusMessage.cxx
+    igtlStringMessage.cxx
+    igtlTimeStamp.cxx
+    igtlTrackingDataMessage.cxx
+    igtlTrajectoryMessage.cxx
+    igtlTransformMessage.cxx
+    igtlUDPClientSocket.cxx
+    igtlUDPServerSocket.cxx
+    igtlUnit.cxx
+    igtl_command.c
+    igtl_header.c
+    igtl_image.c
+    igtl_imgmeta.c
+    igtl_lbmeta.c
+    igtl_ndarray.c
+    igtl_point.c
+    igtl_polydata.c
+    igtl_position.c
+    igtl_qtdata.c
+    igtl_qtrans.c
+    igtl_query.c
+    igtl_sensor.c
+    igtl_status.c
+    igtl_string.c
+    igtl_tdata.c
+    igtl_trajectory.c
+    igtl_transform.c
+    igtl_unit.c
+    igtl_util.c
+    igtl_bind.c
+    igtl_capability.c
+    igtl_colortable.c
+    )
+    
+  FIND_PACKAGE(SWIG REQUIRED)
+  INCLUDE(${SWIG_USE_FILE})
+
+  FIND_PACKAGE(PythonLibs REQUIRED)
+  INCLUDE_DIRECTORIES(${PYTHON_INCLUDE_PATH})
+
+  INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR})
+
+  set(CMAKE SWIG OUTDIR {root})
+
+  SET(CMAKE_SWIG_FLAGS "")
+
+  SET_SOURCE_FILES_PROPERTIES(swig/OpenIGTLink.i PROPERTIES CPLUSPLUS ON)
+  SET_SOURCE_FILES_PROPERTIES(swig/OpenIGTLink.i PROPERTIES SWIG_FLAGS "-cpperraswarn")
+  SWIG_ADD_LIBRARY(OpenIGTLink LANGUAGE python TYPE MODULE SOURCES swig/OpenIGTLink.i ${OpenIGTLink_SWIGSOURCES})
+  SWIG_LINK_LIBRARIES(OpenIGTLink ${PYTHON_LIBRARIES})
+ENDIF()

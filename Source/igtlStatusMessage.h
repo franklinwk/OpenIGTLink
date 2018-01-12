@@ -36,7 +36,7 @@ public:
   igtlTypeMacro(igtl::GetStatusMessage, igtl::HeaderOnlyMessageBase);
   igtlNewMacro(igtl::GetStatusMessage);
 
-protected:
+public:
   GetStatusMessage() : HeaderOnlyMessageBase() { this->m_SendMessageType  = "GET_STATUS"; };
   ~GetStatusMessage() {};
 };
@@ -114,11 +114,11 @@ public:
   /// Gets the status string.
   const char* GetStatusString();
 
-protected:
+public:
   StatusMessage();
   ~StatusMessage();
   
-protected:
+public:
 
   virtual int  CalculateContentBufferSize();
   virtual int  PackContent();

@@ -47,8 +47,8 @@ public:
   typedef SmartPointer<Self>        Pointer;
   typedef SmartPointer<const Self>  ConstPointer;
 
-  igtlTypeMacro(igtl::ServerSocket, igtl::Socket);
-  igtlNewMacro(igtl::ServerSocket);
+  igtlTypeMacro(ServerSocket, Socket);
+  igtlNewMacro(ServerSocket);
 
   // Description:
   // Creates a server socket at a given port and binds to it.
@@ -60,12 +60,14 @@ public:
   // a new ClientSocket object is created and returned.
   // Returns NULL on timeout. 
   //ClientSocket* WaitForConnection(unsigned long msec=0);
-  ClientSocket::Pointer WaitForConnection(unsigned long msec=0);
+  //igtl::ClientSocket::Pointer WaitForConnection(unsigned long msec=0);
+  igtl::ClientSocket* WaitForConnection(unsigned long msec = 0);
+  //SmartPointer<igtl::ClientSocket> WaitForConnection(unsigned long msec = 0);
 
   // Description:
   // Returns the port on which the server is running.
   int GetServerPort();
-protected:
+public:
   ServerSocket();
   ~ServerSocket();
 

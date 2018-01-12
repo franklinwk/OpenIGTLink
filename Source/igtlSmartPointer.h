@@ -53,7 +53,7 @@ namespace igtl
  * \ingroup DataAccess
  */
 template <class TObjectType>
-class IGTL_EXPORT SmartPointer 
+class SmartPointer 
 {
 public:
   typedef TObjectType ObjectType;

@@ -78,12 +78,10 @@ public:
   
   virtual int SetLosslessLink(bool linkMethod);
   
-  /* Speed value Should be set between -8 to 8 for VP9.
-     Values greater than 0 will increase encoder speed at the expense of quality.
-     negative value is not used.*/
+  /* Speed Should be set between -8 to 8 for VP9 */
   enum
   {
-    SlowestSpeed = 0,
+    SlowestSpeed = -8,
     FastestSpeed = 8
   };
   virtual int SetSpeed(int speed);

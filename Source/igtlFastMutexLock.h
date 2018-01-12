@@ -86,7 +86,7 @@ protected:
   FastMutexLock() {}
   ~FastMutexLock() {}
   
-  SimpleFastMutexLock   m_SimpleFastMutexLock;
+  igtl::SimpleFastMutexLock   m_SimpleFastMutexLock;
   void PrintSelf(std::ostream& os) const;
   
 private:

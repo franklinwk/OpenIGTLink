@@ -123,6 +123,10 @@
     }                                                                   \
     virtual const char* GetMessageType()                                \
     {                                                                   \
+      return this->m_Message->GetType();                                \
+    }                                                                   \
+    virtual const char* GetMessageType()                                \
+    {                                                                   \
       return this->m_Message->GetDeviceType();                          \
     }                                                                   \
     virtual int Process(messagetype*, datatype*);                       \

@@ -78,8 +78,9 @@ int ServerSocket::CreateServer(int port)
 }
 
 //-----------------------------------------------------------------------------
-//ClientSocket* ServerSocket::WaitForConnection(unsigned long msec /*=0*/)
-ClientSocket::Pointer ServerSocket::WaitForConnection(unsigned long msec /*=0*/)
+ClientSocket* ServerSocket::WaitForConnection(unsigned long msec /*=0*/)
+//ClientSocket::Pointer ServerSocket::WaitForConnection(unsigned long msec /*=0*/)
+//SmartPointer<igtl::ClientSocket> ServerSocket::WaitForConnection(unsigned long msec /*=0*/)
 {
   if (this->m_SocketDescriptor < 0)
     {
@@ -105,7 +106,8 @@ ClientSocket::Pointer ServerSocket::WaitForConnection(unsigned long msec /*=0*/)
     return NULL;
     }
   // Create a new ClientSocket and return it.
-  ClientSocket::Pointer cs = ClientSocket::New();
+  //ClientSocket::Pointer cs = ClientSocket::New();
+  ClientSocket* cs = new ClientSocket;
   cs->m_SocketDescriptor = clientsock;
   return cs;
 }

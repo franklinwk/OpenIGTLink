@@ -68,10 +68,10 @@ public:
   void          GetRGBA(igtlUint8& r, igtlUint8& g, igtlUint8& b, igtlUint8& a);
 
   /// Sets the position of the point by an array of x, y and z coordinates.
-  void          SetPosition(igtlFloat32 position[3]);
+  void          SetPosition(float position[3]);
 
   /// Sets the position of the point by x, y and z coordinates.
-  void          SetPosition(igtlFloat32 x, igtlFloat32 y, igtlFloat32 z);
+  void          SetPosition(float x, float y, float z);
 
   /// Gets the position of the point using an array of x, y and z coordinates.
   void          GetPosition(igtlFloat32* position);
@@ -91,7 +91,7 @@ public:
   /// Gets the name of the image that owns this label map.
   const char*   GetOwner()                           { return this->m_Owner.c_str(); };
 
-protected:
+public:
   PointElement();
   ~PointElement();
 
@@ -128,7 +128,7 @@ public:
   igtlTypeMacro(igtl::GetPointMessage, igtl::MessageBase);
   igtlNewMacro(igtl::GetPointMessage);
 
-protected:
+public:
   GetPointMessage() : MessageBase() { this->m_SendMessageType  = "GET_POINT"; };
   ~GetPointMessage() {};
 protected:
@@ -167,7 +167,7 @@ public:
   void GetPointElement(int index, PointElement::Pointer& elem);
 
 
-protected:
+public:
   PointMessage();
   ~PointMessage();
   
