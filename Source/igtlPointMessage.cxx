@@ -173,8 +173,9 @@ PointMessage::~PointMessage()
 {
 }
 
-
-int PointMessage::AddPointElement(PointElement::Pointer& elem)
+//temp
+//int PointMessage::AddPointElement(PointElement::Pointer& elem)
+int PointMessage::AddPointElement(PointElement* elem)
 {
   this->m_PointList.push_back(elem);
   return this->m_PointList.size();
@@ -218,7 +219,8 @@ int PointMessage::PackContent()
   element = (igtl_point_element*)(this->m_Content);
 
   igtl_point_element* elementHolder = element;
-  std::vector<PointElement::Pointer>::iterator iter;
+  //std::vector<PointElement::Pointer>::iterator iter;
+  std::vector<PointElement*>::iterator iter;
   for (iter = this->m_PointList.begin(); iter != this->m_PointList.end(); iter ++)
     {
     strncpy((char*)element->name,       (*iter)->GetName(),      IGTL_POINT_LEN_NAME);
@@ -268,7 +270,9 @@ int PointMessage::UnpackContent()
   char strbuf[128];
   for (int i = 0; i < nElement; i ++)
     {
-    PointElement::Pointer elemClass = PointElement::New();
+    //temp
+	//PointElement::Pointer elemClass = PointElement::New();
+	PointElement* elemClass = new PointElement;
 
     // Add '\n' at the end of each string
     // (necessary for a case, where a string reaches the maximum length.)

@@ -59,9 +59,10 @@ public:
   // Waits for a connection. When a connection is received
   // a new ClientSocket object is created and returned.
   // Returns NULL on timeout. 
+
   //ClientSocket* WaitForConnection(unsigned long msec=0);
-  //igtl::ClientSocket::Pointer WaitForConnection(unsigned long msec=0);
-  igtl::ClientSocket* WaitForConnection(unsigned long msec = 0);
+  igtl::ClientSocket::Pointer WaitForConnection(unsigned long msec=0);
+  //igtl::ClientSocket* WaitForConnection(unsigned long msec = 0);
   //SmartPointer<igtl::ClientSocket> WaitForConnection(unsigned long msec = 0);
 
   // Description:

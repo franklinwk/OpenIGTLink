@@ -68,10 +68,10 @@ public:
   void          GetRGBA(igtlUint8& r, igtlUint8& g, igtlUint8& b, igtlUint8& a);
 
   /// Sets the position of the point by an array of x, y and z coordinates.
-  void          SetPosition(float position[3]);
+  void          SetPosition(igtlFloat32 position[3]);
 
   /// Sets the position of the point by x, y and z coordinates.
-  void          SetPosition(float x, float y, float z);
+  void          SetPosition(igtlFloat32 x, igtlFloat32 y, igtlFloat32 z);
 
   /// Gets the position of the point using an array of x, y and z coordinates.
   void          GetPosition(igtlFloat32* position);
@@ -155,7 +155,9 @@ public:
 
   /// Adds a point to the list. It returns the number of points in the list after 
   /// adding the point.
-  int  AddPointElement(PointElement::Pointer& elem);
+  //temp
+  //int  AddPointElement(PointElement::Pointer& elem);
+  int  AddPointElement(PointElement* elem);
 
   /// Clears the points in the list.
   void ClearPointElement();
@@ -178,7 +180,9 @@ protected:
   virtual int  UnpackContent();
 
   /// A list of pointers to the points.
-  std::vector<PointElement::Pointer> m_PointList;
+  //temp
+  //std::vector<PointElement::Pointer> m_PointList;
+  std::vector<PointElement*> m_PointList;
   
 };
 
