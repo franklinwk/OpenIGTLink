@@ -31,8 +31,8 @@ public:
   typedef SmartPointer<Self>           Pointer;
   typedef SmartPointer<const Self>     ConstPointer;
 
-  igtlTypeMacro(GetTransformMessage, HeaderOnlyMessageBase);
-  igtlNewMacro(GetTransformMessage);
+  igtlTypeMacro(igtl::GetTransformMessage, igtl::HeaderOnlyMessageBase);
+  igtlNewMacro(igtl::GetTransformMessage);
 
 public:
   GetTransformMessage() : HeaderOnlyMessageBase() { this->m_SendMessageType  = "GET_TRANS"; };

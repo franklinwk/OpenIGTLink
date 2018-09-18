@@ -36,8 +36,8 @@ public:
   typedef SmartPointer<Self>             Pointer;
   typedef SmartPointer<const Self>       ConstPointer;
 
-  igtlTypeMacro(StringMessage, MessageBase);
-  igtlNewMacro(StringMessage);
+  igtlTypeMacro(igtl::StringMessage, igtl::MessageBase);
+  igtlNewMacro(igtl::StringMessage);
 
 public:
 

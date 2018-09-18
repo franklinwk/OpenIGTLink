@@ -78,6 +78,10 @@ int MessageBase::CalculateContentBufferSize()
   return 0;
 }
 
+int MessageBase::Test()
+{
+	return 24;
+}
 
 igtl::MessageBase::Pointer MessageBase::Clone()
 {

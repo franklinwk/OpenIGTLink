@@ -377,10 +377,10 @@ namespace igtl
     typedef SmartPointer<Self>           Pointer;
     typedef SmartPointer<const Self>     ConstPointer;
 
-    igtlTypeMacro(HeaderOnlyMessageBase, MessageBase);
-    igtlNewMacro(HeaderOnlyMessageBase);
+    igtlTypeMacro(igtl::HeaderOnlyMessageBase, igtl::MessageBase);
+    igtlNewMacro(igtl::HeaderOnlyMessageBase);
 
-  public:
+  protected:
     HeaderOnlyMessageBase()
     {
       this->m_SendMessageType  = "";
