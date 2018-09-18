@@ -1,6 +1,9 @@
 %module OpenIGTLink
 %include <windows.i>
 %include "std_string.i"
+%include "carrays.i"
+
+%array_class(float, floatArray);
 
 %begin %{
 #ifdef _MSC_VER
@@ -58,16 +61,17 @@ typedef float igtlFloat32;
 #include "igtlObject.h"
 #include "igtlLightObject.h"
 #include "igtlMessageBase.h"
+#include "igtlMessageHeader.h"
 #include "igtlMessageFactory.h"
 
 #include "igtlSocket.h"
 #include "igtlServerSocket.h"
 #include "igtlClientSocket.h"
-//#include "igtlTransformMessage.h"
-//#include "igtlStringMessage.h"
+#include "igtlTransformMessage.h"
+#include "igtlStringMessage.h"
 //#include "igtlStatusMessage.h"
 #include "igtlPointMessage.h"
-//#include "igtlImageMessage.h"
+#include "igtlImageMessage.h"
 //#include "igtlPolyDataMessage.h"
 //#include "igtlPositionMessage.h"
 
@@ -98,11 +102,13 @@ typedef float igtlFloat32;
 %include "igtlServerSocket.h"
 %include "igtlClientSocket.h"
 %include "igtlMessageBase.h"
-//%include "igtlTransformMessage.h"
-//%include "igtlStringMessage.h"
-//%include "igtlStatusMessage.h"
+%include "igtlTransformMessage.h"
+%include "igtlStringMessage.h"
 %include "igtlPointMessage.h"
-//%include "igtlImageMessage.h"
+%include "igtlImageMessage.h"
+%include "igtlMessageHeader.h"
+
+//%include "igtlStatusMessage.h"
 //%include "igtlPolyDataMessage.h"
 //%include "igtlPositionMessage.h"
 
