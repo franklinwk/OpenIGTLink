@@ -304,6 +304,30 @@ void ImageMessage::SetMatrix(Matrix4x4& mat)
   matrix[3][3] = mat[3][3];
 }
 
+//TODO: Replace with more elegant parameter
+void ImageMessage::SetMatrix(float rot[9], float pos[3])
+{
+	matrix[0][0] = rot[0];
+	matrix[1][0] = rot[3];
+	matrix[2][0] = rot[6];
+	matrix[3][0] = 0.0;
+
+	matrix[0][1] = rot[1];
+	matrix[1][1] = rot[4];
+	matrix[2][1] = rot[7];
+	matrix[3][1] = 0.0;
+
+	matrix[0][2] = rot[2];
+	matrix[1][2] = rot[5];
+	matrix[2][2] = rot[8];
+	matrix[3][2] = 0.0;
+
+	matrix[0][3] = pos[0];
+	matrix[1][3] = pos[1];
+	matrix[2][3] = pos[2];
+	matrix[3][3] = 1.0;
+}
+
 void ImageMessage::GetMatrix(Matrix4x4& mat)
 {
   mat[0][0] = matrix[0][0];

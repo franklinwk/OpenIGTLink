@@ -33,10 +33,10 @@ public:
   typedef SmartPointer<Self>             Pointer;
   typedef SmartPointer<const Self>       ConstPointer;
 
-  igtlTypeMacro(igtl::GetImageMessage, igtl::HeaderOnlyMessageBase);
-  igtlNewMacro(igtl::GetImageMessage);
+  igtlTypeMacro(GetImageMessage, HeaderOnlyMessageBase);
+  igtlNewMacro(GetImageMessage);
 
-protected:
+public:
 
  GetImageMessage() : HeaderOnlyMessageBase() { this->m_SendMessageType  = "GET_IMAGE";};
   ~GetImageMessage() {};
@@ -52,10 +52,10 @@ public:
   typedef SmartPointer<Self>             Pointer;
   typedef SmartPointer<const Self>       ConstPointer;
   
-  igtlTypeMacro(igtl::StopImageMessage, igtl::HeaderOnlyMessageBase);
-  igtlNewMacro(igtl::StopImageMessage);
+  igtlTypeMacro(StopImageMessage, HeaderOnlyMessageBase);
+  igtlNewMacro(StopImageMessage);
   
-protected:
+public:
   
   StopImageMessage() : HeaderOnlyMessageBase() { this->m_SendMessageType  = "STP_IMAGE";};
   ~StopImageMessage() {};
@@ -84,8 +84,8 @@ public:
   typedef SmartPointer<Self>        Pointer;
   typedef SmartPointer<const Self>  ConstPointer;
 
-  igtlTypeMacro(igtl::ImageMessage, igtl::MessageBase)
-  igtlNewMacro(igtl::ImageMessage);
+  igtlTypeMacro(ImageMessage, MessageBase)
+  igtlNewMacro(ImageMessage);
 
 public:
 
@@ -208,6 +208,9 @@ public:
 
   /// Sets the origin/orientation matrix.
   void SetMatrix(Matrix4x4& mat);
+  
+  /// Sets the origin/orientation matrix.
+  void SetMatrix(float rot[9], float pos[3]);  
 
   /// Gets the origin/orientation matrix.
   void GetMatrix(Matrix4x4& mat);
@@ -279,7 +282,7 @@ public:
   /// Gets a pointer to the scalar data.
   void* GetScalarPointer();
 
-protected:
+public:
   ImageMessage();
   ~ImageMessage();
   

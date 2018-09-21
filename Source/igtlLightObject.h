@@ -113,7 +113,7 @@ public:
    * method, use it with care. */
   virtual void SetReferenceCount(int);
 
-protected:
+public:
   LightObject():m_ReferenceCount(1) {}
   virtual ~LightObject(); 
 

@@ -46,7 +46,7 @@ public:
   igtlTypeMacro(igtl::GetImageMessage2, igtl::MessageBase);
   igtlNewMacro(igtl::GetImageMessage2);
 
-protected:
+public:
   GetImageMessage2() : MessageBase() { this->m_SendMessageType  = "GET_IMAGE"; };
   ~GetImageMessage2() {};
 protected:
@@ -300,7 +300,7 @@ public:
 #endif // FRAGMENTED_PACK 
 
 
-protected:
+public:
   ImageMessage2();
   ~ImageMessage2();
   
